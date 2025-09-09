@@ -12,785 +12,103 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     (function () {
-      // ✅ Your EmailJS public key
+      // ✅ Your actual EmailJS Public Key
       emailjs.init("twwP365c5kihIeOT7");
     })();
   </script>
 
-  <!-- ChatGPT (Browser-safe: will FALL BACK if key is not provided) -->
-  <script>
-    // ⚠️ Do NOT put a real OpenAI key in client code. Leave blank and use fallback,
-    // or point to a serverless endpoint. (I can give you the Vercel API file if you want.)
-    const OPENAI_API_KEY = ""; // Leave empty to use safe fallback replies
-
-    const INSURANCE_SYSTEM_PROMPT = `You are Ray's AI Insurance Assistant, an expert life insurance advisor working for Ray's Financial Group. You help families and business owners understand life insurance options.
-
-Your expertise includes:
-- Key Person Insurance for business protection
-- Index Universal Life (IUL) for wealth building
-- Whole Life Insurance for guaranteed growth
-- Term Life Insurance for affordable protection
-- Business succession planning
-- Tax advantages of life insurance
-- Legacy and estate planning
-
-Your personality:
-- Friendly, knowledgeable, and trustworthy
-- Speak parent-to-parent, not salesperson-to-customer
-- Use simple language, avoid jargon
-- Always be helpful and educational
-- When appropriate, suggest they contact Curtis Ray at (386) 400-5886 for personalized quotes
-
-Key points to remember:
-- Ray's Financial Group specializes in smart life insurance that builds wealth
-- Curtis Ray has 15+ years experience helping families
-- They serve clients nationwide
-- Focus on protection AND wealth building, not just basic term life
-- Business owners need Key Person Insurance
-- IUL offers market growth with downside protection
-- Whole Life provides guaranteed growth and dividends
-
-Always end responses by asking if they have other questions or if they'd like to speak with Curtis directly.
-
-Keep responses conversational, helpful, and under 200 words when possible.`;
-  </script>
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     body { font-family: 'Inter', sans-serif; }
     .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #065f46 50%, #b45309 100%); }
     .legacy-gradient { background: linear-gradient(135deg, #065f46 0%, #b45309 50%, #1e3a8a 100%); }
-    .card-hover { transition: all .4s cubic-bezier(.175,.885,.32,1.275); position: relative; overflow: hidden; }
-    .card-hover::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent); transition:left .5s; }
-    .card-hover:hover::before { left:100%; }
-    .card-hover:hover { transform: translateY(-8px) scale(1.02); box-shadow:0 20px 40px rgba(0,0,0,.15); }
-    .pulse-glow { animation: pulseGlow 2s ease-in-out infinite alternate; }
-    @keyframes pulseGlow { from { box-shadow:0 0 20px rgba(30,58,138,.4);} to { box-shadow:0 0 30px rgba(30,58,138,.8),0 0 40px rgba(30,58,138,.4);} }
-    .floating { animation:floating 3s ease-in-out infinite; }
-    @keyframes floating { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}}
-    .fade-in-up { animation: fadeInUp .8s ease-out; }
-    @keyframes fadeInUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
-    .slide-in-left { animation: slideInLeft .8s ease-out; }
-    @keyframes slideInLeft { from {opacity:0; transform:translateX(-50px);} to {opacity:1; transform:translateX(0);} }
-    .slide-in-right { animation: slideInRight .8s ease-out; }
-    @keyframes slideInRight { from {opacity:0; transform:translateX(50px);} to {opacity:1; transform:translateX(0);} }
-    .gold-accent {
-      background: linear-gradient(45deg, #b45309, #d97706, #f59e0b);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .timeline-line { background: linear-gradient(to right, #1e3a8a, #065f46, #b45309, #d97706); height:4px; border-radius:2px; }
     .cta-button { background: linear-gradient(45deg,#b45309,#d97706); transition: all .3s ease; box-shadow: 0 4px 15px rgba(180,83,9,.3); }
     .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(180,83,9,.4);}
-    .trust-icon { background: linear-gradient(135deg, #1e3a8a, #065f46); }
   </style>
 </head>
 
 <body class="bg-white">
   <!-- Header -->
   <header class="bg-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center">
-          <div class="w-12 h-12 bg-gradient-to-br from-blue-900 to-green-800 rounded-xl flex items-center justify-center">
-            <span class="text-white font-bold text-2xl">🛡️</span>
-          </div>
-          <span class="ml-3 text-xl md:text-2xl font-black text-blue-900">Ray's Financial Group</span>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
-          <a href="tel:386-400-5886" class="bg-blue-900 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold hover:bg-blue-800 transition-all duration-300 transform hover:scale-105 flex items-center justify-center text-sm md:text-base">
-            📞 (386) 400-5886
-          </a>
-          <button onclick="scrollToSection('quote-form')" class="cta-button text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-bold text-sm md:text-base">
-            Get Free Quote
-          </button>
-        </div>
-      </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-blue-900">Ray's Financial Group</h1>
+      <a href="tel:386-400-5886" class="cta-button text-white px-4 py-2 rounded-lg font-bold">📞 (386) 400-5886</a>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero-gradient text-white py-24 relative overflow-hidden min-h-screen flex items-center">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-20 left-10 w-32 h-32 bg-white rounded-full floating"></div>
-      <div class="absolute top-40 right-20 w-24 h-24 bg-white rounded-full floating" style="animation-delay:1s"></div>
-      <div class="absolute bottom-20 left-1/4 w-20 h-20 bg-white rounded-full floating" style="animation-delay:2s"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
-          Life Insurance That <span class="gold-accent">Actually Works</span> for Your Family
-        </h1>
-        <p class="text-lg md:text-xl lg:text-2xl mb-12 opacity-95 max-w-4xl mx-auto leading-relaxed">
-          Smart protection that grows with your family and builds real wealth — not just a payout. Perfect for parents who want more than basic coverage.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-          <button onclick="scrollToSection('quote-form')" class="cta-button text-white px-8 md:px-12 py-4 md:py-6 rounded-xl text-lg md:text-xl font-bold transform hover:scale-105 shadow-2xl">
-            👨‍👩‍👧‍👦 See What We Qualify For
-          </button>
-          <a href="tel:386-400-5886" class="bg-white/10 backdrop-blur-md text-white px-8 md:px-12 py-4 md:py-6 rounded-xl text-lg md:text-xl font-bold hover:bg-white/20 transition-all border border-white/20">
-            💬 Chat: (386) 400-5886
-          </a>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          <div class="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/20">
-            <div class="text-3xl md:text-4xl mb-2 md:mb-3">🏠</div>
-            <h3 class="font-bold text-base md:text-lg mb-1">Keep Your Home</h3>
-            <p class="text-white/80 text-xs md:text-sm">Mortgage stays paid, family stays put</p>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/20">
-            <div class="text-3xl md:text-4xl mb-2 md:mb-3">🎓</div>
-            <h3 class="font-bold text-base md:text-lg mb-1">Kids' Education</h3>
-            <p class="text-white/80 text-xs md:text-sm">College funds that keep growing</p>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/20">
-            <div class="text-3xl md:text-4xl mb-2 md:mb-3">💳</div>
-            <h3 class="font-bold text-base md:text-lg mb-1">Pay Off Debt</h3>
-            <p class="text-white/80 text-xs md:text-sm">Clear the slate for your family</p>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/20">
-            <div class="text-3xl md:text-4xl mb-2 md:mb-3">🌱</div>
-            <h3 class="font-bold text-base md:text-lg mb-1">Money Grows</h3>
-            <p class="text-white/80 text-xs md:text-sm">Build wealth while you're here</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-          Life Insurance That <span class="gold-accent">Does More</span> Than Just Pay Out
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Beyond basic term life, there are smart policies that protect your family AND help you build wealth while you're alive.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 mb-16">
-        <!-- Key Person -->
-        <div class="card-hover bg-white p-8 rounded-3xl shadow-lg border-2 border-blue-100 slide-in-left">
-          <div class="w-20 h-20 trust-icon rounded-2xl flex items-center justify-center mb-6 pulse-glow">
-            <span class="text-3xl floating">👤</span>
-          </div>
-          <h3 class="text-2xl font-black text-blue-900 mb-4">Business Owner Protection</h3>
-          <p class="text-gray-700 mb-6 text-lg leading-relaxed">
-            🏢 If you own a business or are a key employee, this protects your family's income and your company's future.
-          </p>
-          <div class="space-y-3 mb-6">
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Protects family income source</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Keeps the business running</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">May be tax-deductible</span></div>
-          </div>
-          <button onclick="scrollToSection('quote-form')" class="w-full cta-button text-white py-3 rounded-lg font-bold">Learn More</button>
-        </div>
-
-        <!-- IUL -->
-        <div class="card-hover bg-white p-8 rounded-3xl shadow-lg border-2 border-green-100 fade-in-up" style="animation-delay:.2s">
-          <div class="w-20 h-20 bg-gradient-to-br from-green-800 to-amber-700 rounded-2xl flex items-center justify-center mb-6 pulse-glow">
-            <span class="text-3xl floating">📈</span>
-          </div>
-          <h3 class="text-2xl font-black text-green-800 mb-4">Growth Life Insurance (IUL)</h3>
-          <p class="text-gray-700 mb-6 text-lg leading-relaxed">
-            📈 Life insurance that grows with the market (with a 0% floor). Protection + wealth-building.
-          </p>
-          <div class="space-y-3 mb-6">
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Upside growth potential</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Downside protection</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Tax-advantaged access</span></div>
-          </div>
-          <button onclick="scrollToSection('quote-form')" class="w-full cta-button text-white py-3 rounded-lg font-bold">Learn More</button>
-        </div>
-
-        <!-- Whole Life -->
-        <div class="card-hover bg-white p-8 rounded-3xl shadow-lg border-2 border-amber-100 slide-in-right">
-          <div class="w-20 h-20 bg-gradient-to-br from-amber-700 to-blue-900 rounded-2xl flex items-center justify-center mb-6 pulse-glow">
-            <span class="text-3xl floating">🏛️</span>
-          </div>
-          <h3 class="text-2xl font-black text-amber-700 mb-4">Permanent Life Insurance</h3>
-          <p class="text-gray-700 mb-6 text-lg leading-relaxed">
-            🏛️ Rock-solid protection with guaranteed cash value growth and potential dividends.
-          </p>
-          <div class="space-y-3 mb-6">
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Guaranteed growth</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Level premiums</span></div>
-            <div class="flex items-center"><span class="text-green-600 mr-3 text-lg">✓</span><span class="font-semibold">Lifetime coverage</span></div>
-          </div>
-          <button onclick="scrollToSection('quote-form')" class="w-full cta-button text-white py-3 rounded-lg font-bold">Learn More</button>
-        </div>
-      </div>
-
-      <!-- Other Solutions -->
-      <div class="bg-white p-8 rounded-2xl shadow-lg">
-        <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Complete Insurance Solutions</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="text-center p-4 bg-gray-50 rounded-xl"><div class="text-3xl mb-2">⏰</div><h4 class="font-bold mb-2">Term Life</h4><p class="text-sm text-gray-600">Affordable temporary coverage</p></div>
-          <div class="text-center p-4 bg-gray-50 rounded-xl"><div class="text-3xl mb-2">🏠</div><h4 class="font-bold mb-2">Mortgage Protection</h4><p class="text-sm text-gray-600">Pay off your home loan</p></div>
-          <div class="text-center p-4 bg-gray-50 rounded-xl"><div class="text-3xl mb-2">🕊️</div><h4 class="font-bold mb-2">Final Expense</h4><p class="text-sm text-gray-600">Cover burial & funeral costs</p></div>
-          <div class="text-center p-4 bg-gray-50 rounded-xl"><div class="text-3xl mb-2">🔄</div><h4 class="font-bold mb-2">Universal Life</h4><p class="text-sm text-gray-600">Flexible premium options</p></div>
-        </div>
-        <div class="text-center mt-8">
-          <button onclick="scrollToSection('quote-form')" class="cta-button text-white px-8 py-3 rounded-lg font-bold">
-            See All Options & Get Quote
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-black text-gray-900 mb-6">Why Families <span class="gold-accent">Choose Ray</span></h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">15+ years helping parents protect families and build wealth.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="slide-in-left space-y-8">
-          <div class="flex items-start">
-            <div class="w-16 h-16 trust-icon rounded-2xl flex items-center justify-center mr-6 flex-shrink-0"><span class="text-2xl">🎯</span></div>
-            <div><h3 class="text-xl font-bold text-gray-900 mb-2">Parent-to-Parent Advice</h3><p class="text-gray-600">Policies that protect your family AND help you build wealth.</p></div>
-          </div>
-          <div class="flex items-start">
-            <div class="w-16 h-16 trust-icon rounded-2xl flex items-center justify-center mr-6 flex-shrink-0"><span class="text-2xl">👨‍👩‍👧‍👦</span></div>
-            <div><h3 class="text-xl font-bold text-gray-900 mb-2">Family First Approach</h3><p class="text-gray-600">We tailor plans around your real life and goals.</p></div>
-          </div>
-          <div class="flex items-start">
-            <div class="w-16 h-16 trust-icon rounded-2xl flex items-center justify-center mr-6 flex-shrink-0"><span class="text-2xl">📊</span></div>
-            <div><h3 class="text-xl font-bold text-gray-900 mb-2">Real Results</h3><p class="text-gray-600">Hundreds of families protected with $50M+ in coverage.</p></div>
-          </div>
-        </div>
-
-        <div class="slide-in-right">
-          <div class="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl border-2 border-blue-100 text-center">
-            <div class="w-32 h-32 bg-gradient-to-br from-blue-900 to-green-800 rounded-full mx-auto mb-6 flex items-center justify-center">
-              <span class="text-4xl">👨‍💼</span>
-            </div>
-            <blockquote class="text-lg text-gray-700 italic mb-6">
-              "Smart life insurance can protect your family AND help you build wealth for their future."
-            </blockquote>
-            <p class="font-bold text-gray-900">Curtis Ray</p>
-            <p class="text-gray-600">Licensed Insurance Professional</p>
-            <p class="text-gray-600">Ray's Financial Group</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Legacy -->
-  <section class="legacy-gradient text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-black mb-6">Give Your Kids <span class="gold-accent">Every Advantage</span></h2>
-        <p class="text-xl opacity-95 max-w-4xl mx-auto">Smart life insurance can fund college, protect your home, and create opportunity.</p>
-      </div>
-
-      <div class="max-w-5xl mx-auto">
-        <div class="timeline-line mb-12"></div>
-        <div class="grid md:grid-cols-4 gap-8">
-          <div class="text-center fade-in-up" style="animation-delay:.1s">
-            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30"><span class="text-3xl">🏠</span></div>
-            <h3 class="text-xl font-bold mb-3">Secure Your Home</h3>
-            <p class="text-white/80">Keep your family's lifestyle stable.</p>
-          </div>
-          <div class="text-center fade-in-up" style="animation-delay:.2s">
-            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30"><span class="text-3xl">💼</span></div>
-            <h3 class="text-xl font-bold mb-3">Protect Income</h3>
-            <p class="text-white/80">Key Person for business owners & pros.</p>
-          </div>
-          <div class="text-center fade-in-up" style="animation-delay:.3s">
-            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30"><span class="text-3xl">🎓</span></div>
-            <h3 class="text-xl font-bold mb-3">Fund College</h3>
-            <p class="text-white/80">Build tax-advantaged education funds.</p>
-          </div>
-          <div class="text-center fade-in-up" style="animation-delay:.4s">
-            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30"><span class="text-3xl">🌟</span></div>
-            <h3 class="text-xl font-bold mb-3">Create Options</h3>
-            <p class="text-white/80">Give them a head start in life.</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-16">
-          <button onclick="scrollToSection('quote-form')" class="cta-button text-white px-12 py-6 rounded-xl text-xl font-bold transform hover:scale-105 shadow-2xl">
-            👨‍👩‍👧‍👦 Protect My Family's Future
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Chat -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-gray-900 mb-6">Have Questions? <span class="gold-accent">Chat with Ray</span></h2>
-      <p class="text-xl text-gray-600 mb-8">Get instant answers about policy types, coverage amounts, and business protection.</p>
-
-      <div class="bg-white rounded-2xl shadow-lg border-2 border-blue-100 overflow-hidden">
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-900 to-green-800 text-white p-4 flex items-center justify-between">
-          <div class="flex items-center">
-            <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3"><span class="text-xl">🤖</span></div>
-            <div>
-              <h3 class="font-bold text-lg">Ray's AI Insurance Assistant</h3>
-              <p class="text-white/80 text-sm">Ask me anything about life insurance!</p>
-            </div>
-          </div>
-          <div class="flex items-center space-x-2"><div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div><span class="text-sm text-white/80">Online</span></div>
-        </div>
-
-        <!-- Messages -->
-        <div id="chat-messages" class="h-96 overflow-y-auto p-4 bg-gray-50 space-y-4">
-          <div class="flex items-start space-x-3">
-            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white text-sm">🤖</span></div>
-            <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-              <p class="text-gray-800 text-sm">Hi! I'm Ray's AI assistant. I can help you with:</p>
-              <div class="mt-2 space-y-1 text-xs text-gray-600">
-                <p>• Policy types & benefits</p>
-                <p>• Coverage recommendations</p>
-                <p>• Business protection strategies</p>
-                <p>• Legacy planning options</p>
-              </div>
-              <p class="text-gray-800 text-sm mt-2">What would you like to know?</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick chips -->
-        <div class="p-3 bg-white border-t border-gray-200">
-          <div class="flex flex-wrap gap-2 mb-3">
-            <button onclick="sendQuickMessage('What is Key Person Insurance?')" class="bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-xs">Key Person Insurance</button>
-            <button onclick="sendQuickMessage('How does IUL work?')" class="bg-green-100 hover:bg-green-200 text-green-800 px-3 py-1 rounded-full text-xs">IUL Benefits</button>
-            <button onclick="sendQuickMessage('How much coverage do I need?')" class="bg-amber-100 hover:bg-amber-200 text-amber-800 px-3 py-1 rounded-full text-xs">Coverage Amount</button>
-            <button onclick="sendQuickMessage('What are the tax benefits?')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-xs">Tax Benefits</button>
-          </div>
-        </div>
-
-        <!-- Input -->
-        <div class="p-4 bg-white border-t border-gray-200">
-          <div class="flex space-x-3">
-            <input id="chat-input" type="text" placeholder="Ask me about life insurance..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onkeypress="handleKeyPress(event)"/>
-            <button onclick="sendMessage()" class="cta-button text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg">Send</button>
-          </div>
-          <div class="flex justify-between items-center mt-2">
-            <p class="text-xs text-gray-500">Powered by AI • For detailed quotes, call (386) 400-5886</p>
-            <button onclick="clearChat()" class="text-xs text-gray-400 hover:text-gray-600">Clear Chat</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="hero-gradient text-white py-24 text-center">
+    <h2 class="text-4xl md:text-6xl font-black mb-6">Life Insurance That Builds a Legacy</h2>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10">Protect your family, grow wealth, and leave a legacy through Key Person Insurance, IUL, Whole Life, and more.</p>
+    <button onclick="scrollToSection('quote-form')" class="cta-button text-white px-8 py-4 rounded-xl text-lg font-bold">🎯 Get My Free Quote</button>
   </section>
 
   <!-- Quote Form -->
   <section id="quote-form" class="py-20 bg-blue-900">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-8">
-          <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-              See What Your Family <span class="gold-accent">Qualifies For</span>
-            </h2>
-            <p class="text-xl text-gray-600">Get your personalized quote and discover which policies fit your goals.</p>
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="bg-white rounded-2xl shadow-2xl p-8">
+        <h3 class="text-2xl font-bold text-center mb-6">See What Your Family Qualifies For</h3>
+
+        <form id="quote-request-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
+          <!-- Honeypot -->
+          <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="firstName" class="block font-semibold mb-2">First Name *</label>
+              <input id="firstName" name="firstName" type="text" required class="w-full px-4 py-3 border rounded-lg"/>
+            </div>
+            <div>
+              <label for="lastName" class="block font-semibold mb-2">Last Name *</label>
+              <input id="lastName" name="lastName" type="text" required class="w-full px-4 py-3 border rounded-lg"/>
+            </div>
+            <div>
+              <label for="email" class="block font-semibold mb-2">Email *</label>
+              <input id="email" name="email" type="email" required class="w-full px-4 py-3 border rounded-lg"/>
+            </div>
+            <div>
+              <label for="phone" class="block font-semibold mb-2">Phone *</label>
+              <input id="phone" name="phone" type="tel" required class="w-full px-4 py-3 border rounded-lg"/>
+            </div>
           </div>
 
-          <form id="quote-request-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
-            <!-- Honeypot (spam guard) -->
-            <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
-
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
-                <input id="firstName" name="firstName" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-              </div>
-              <div>
-                <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
-                <input id="lastName" name="lastName" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
-                <input id="email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-              </div>
-              <div>
-                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
-                <input id="phone" name="phone" type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-              </div>
-              <div>
-                <label for="state" class="block text-sm font-semibold text-gray-700 mb-2">State of Residence *</label>
-                <select id="state" name="state" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                  <option value="">Select your state</option>
-                  <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option>
-                  <option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option>
-                  <option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option>
-                  <option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option>
-                  <option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option>
-                  <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option>
-                  <option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option>
-                  <option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
-                  <option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option>
-                  <option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option>
-                  <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
-                </select>
-              </div>
-              <div>
-                <label for="age" class="block text-sm font-semibold text-gray-700 mb-2">Age *</label>
-                <select id="age" name="age" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                  <option value="">Select your age</option>
-                  <option value="18-25">18-25</option><option value="26-35">26-35</option><option value="36-45">36-45</option>
-                  <option value="46-55">46-55</option><option value="56-65">56-65</option><option value="66+">66+</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Policy Interest -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-3">What type of coverage interests you most? *</label>
-              <div class="grid md:grid-cols-3 gap-3">
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="Key Person Insurance" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">Key Person Insurance</span>
-                </label>
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="IUL (Growth Insurance)" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">IUL (Growth Insurance)</span>
-                </label>
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="Whole Life Insurance" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">Whole Life Insurance</span>
-                </label>
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="Term Life Insurance" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">Term Life Insurance</span>
-                </label>
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="Business Protection" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">Business Protection</span>
-                </label>
-                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
-                  <input type="radio" name="policyInterest" value="Not Sure" required class="mr-3 text-blue-600">
-                  <span class="text-sm font-medium">Not Sure</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Coverage Amount (✅ fixed select) -->
-            <div>
-              <label for="coverageAmount" class="block text-sm font-semibold text-gray-700 mb-2">Desired Coverage Amount *</label>
-              <select id="coverageAmount" name="coverageAmount" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <option value="">Select coverage amount</option>
-                <option value="$100,000">$100,000</option>
-                <option value="$250,000">$250,000</option>
-                <option value="$500,000">$500,000</option>
-                <option value="$750,000">$750,000</option>
-                <option value="$1,000,000">$1,000,000</option>
-                <option value="$1,500,000">$1,500,000</option>
-                <option value="$2,000,000+">$2,000,000+</option>
-                <option value="Not Sure">Not Sure</option>
-              </select>
-            </div>
-
-            <!-- Comments -->
-            <div>
-              <label for="comments" class="block text-sm font-semibold text-gray-700 mb-2">Additional Comments or Questions (Optional)</label>
-              <textarea id="comments" name="comments" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your needs, family situation, or business..."></textarea>
-            </div>
-
-            <!-- Consent (TCPA) -->
-            <label class="flex items-start gap-2">
-              <input type="checkbox" id="consent" class="mt-1" required>
-              <span class="text-xs text-gray-600">
-                By submitting, you agree to be contacted by phone, email, and text at the number provided.
-                Message/data rates may apply. Consent is not a condition of purchase.
-              </span>
-            </label>
-
-            <!-- Submit -->
-            <div class="text-center space-y-4">
-              <button type="submit" class="cta-button text-white px-12 py-4 rounded-xl text-xl font-bold transform hover:scale-105 transition-all w-full sm:w-auto">
-                🎯 Get My Free Quote
-              </button>
-              <div class="text-gray-500 text-sm">or</div>
-              <button type="button" onclick="handleInstantSubmit()" class="bg-green-600 hover:bg-green-700 text-white px-12 py-4 rounded-xl text-xl font-bold transform hover:scale-105 transition-all w-full sm:w-auto">
-                ⚡ Submit & Get Instant Confirmation
-              </button>
-            </div>
-          </form>
-
-          <div class="text-center mt-6">
-            <p class="text-sm text-gray-500">Quotes provided by licensed agent Curtis Ray. No obligation. Your information is secure.</p>
+          <div>
+            <label for="policyInterest" class="block font-semibold mb-2">Interested Policy *</label>
+            <select id="policyInterest" name="policyInterest" required class="w-full px-4 py-3 border rounded-lg">
+              <option value="">Select...</option>
+              <option>Key Person Insurance</option>
+              <option>IUL (Growth Insurance)</option>
+              <option>Whole Life Insurance</option>
+              <option>Term Life Insurance</option>
+              <option>Not Sure</option>
+            </select>
           </div>
-        </div>
+
+          <!-- Consent -->
+          <label class="flex items-start gap-2 text-sm">
+            <input type="checkbox" id="consent" required class="mt-1">
+            <span>By submitting, you agree to be contacted by phone, email, and text at the number provided. Message/data rates may apply. Consent is not a condition of purchase.</span>
+          </label>
+
+          <div class="text-center">
+            <button type="submit" class="cta-button text-white px-8 py-4 rounded-lg font-bold">Submit Quote Request</button>
+          </div>
+        </form>
+
+        <div id="form-message" class="mt-6 text-center text-gray-700"></div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <div class="flex items-center mb-4">
-            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xl">🛡️</span></div>
-            <span class="ml-3 text-xl font-bold">Ray's Financial Group</span>
-          </div>
-          <p class="text-gray-400 mb-4">Building legacies through strategic life insurance planning. Protecting families and businesses for over 15 years.</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Contact Information</h3>
-          <div class="space-y-2 text-gray-400">
-            <p>📞 Phone: (386) 400-5886</p>
-            <p>✉️ Email: info@raysfinancialgroup.com</p>
-            <p>🏢 Licensed Insurance Professional</p>
-            <p>📍 Serving clients nationwide</p>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Our Specialties</h3>
-          <div class="space-y-2 text-gray-400">
-            <p>• Key Person Insurance</p>
-            <p>• Index Universal Life (IUL)</p>
-            <p>• Whole Life Insurance</p>
-            <p>• Business Protection Planning</p>
-            <p>• Legacy Wealth Building</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-        <p class="text-gray-400 text-sm">© 2024 Ray's Financial Group. All rights reserved. | Licensed Insurance Professional Curtis Ray</p>
-        <p class="text-gray-500 text-xs mt-2">For educational purposes only. Policy details vary by state and carrier. Individual results may vary.</p>
-      </div>
-    </div>
+  <footer class="bg-gray-900 text-white text-center py-6">
+    <p>© 2024 Ray's Financial Group | Curtis Ray</p>
   </footer>
 
-  <!-- Floating Buttons -->
-  <div class="fixed bottom-6 right-6 z-50 space-y-4">
-    <a href="tel:386-400-5886" class="block w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full shadow-lg flex items-center justify-center transition-all transform hover:scale-110">
-      <span class="text-white text-xl">📞</span>
-    </a>
-    <button onclick="scrollToSection('quote-form')" class="block w-14 h-14 cta-button rounded-full shadow-lg flex items-center justify-center transition-all transform hover:scale-110">
-      <span class="text-white text-xl">💬</span>
-    </button>
-  </div>
-
-  <!-- Scripts -->
   <script>
     function scrollToSection(id) {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Simple intersection setup for subtle effects
-    const observer = new IntersectionObserver((entries)=> {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      observer.observe(el);
-    });
-
-    // Chatbot
-    const chatMessages = document.getElementById('chat-messages');
-    const chatInput = document.getElementById('chat-input');
-
-    const insuranceKnowledge = {
-      'key person insurance': {
-        keywords: ['key person','key man','business insurance','employee insurance'],
-        response: "Key Person Insurance protects your business if a key employee or owner passes away. It can cover lost profits, replacement costs, debts, and keep operations stable. Coverage often ranges from $100K to $5M+ depending on the person's value. Want help estimating the right amount?"
-      },
-      'iul': {
-        keywords: ['iul','index universal life','indexed universal','market growth'],
-        response: "Index Universal Life (IUL) offers cash value growth linked to an index (e.g., S&P 500) with a typical 0% floor, plus tax-advantaged access and lifetime protection. It’s a protection + wealth-building combo."
-      },
-      'whole life': {
-        keywords: ['whole life','permanent insurance','guaranteed growth','dividends'],
-        response: "Whole Life provides lifetime coverage, guaranteed cash value growth, level premiums, and potential dividends. Many families use it as a 'family bank' for education, emergencies, or opportunities."
-      },
-      'coverage amount': {
-        keywords: ['how much','coverage amount','need coverage'],
-        response: "Guidelines: Personal—10–12× income, plus debts and goals (college/retirement). Business/Key Person—5–10× annual profit contribution, plus replacement costs and debts. Want me to tailor it to you?"
-      },
-      'tax benefits': {
-        keywords: ['tax','tax free','tax benefits','tax advantages'],
-        response: "Life insurance can offer tax-deferred growth, tax-free loans/withdrawals to basis, and tax-free death benefits. Proper structuring helps with estate and business planning. Want examples for your situation?"
-      },
-      'term life': {
-        keywords: ['term life','term insurance','temporary','cheap insurance'],
-        response: "Term Life is affordable for temporary needs (mortgage, young kids). No cash value and expires at term-end. Often used alongside permanent coverage to balance budget and goals."
-      },
-      'business protection': {
-        keywords: ['business','protect business','succession','buy-sell'],
-        response: "Business protection includes Key Person coverage, Buy-Sell funding, executive benefits, and succession planning—helping continuity, fair valuations, and liquidity for transitions."
-      }
-    };
-
-    function addMessage(message, isUser=false, isTyping=false) {
-      const wrap = document.createElement('div');
-      wrap.className = 'flex items-start space-x-3' + (isUser ? ' justify-end' : '');
-
-      if (isUser) {
-        wrap.innerHTML = `
-          <div class="bg-blue-600 text-white p-3 rounded-lg shadow-sm max-w-xs">
-            <p class="text-sm">${message}</p>
-          </div>
-          <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-            <span class="text-white text-sm">👤</span>
-          </div>`;
-      } else if (isTyping) {
-        wrap.innerHTML = `
-          <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <span class="text-white text-sm">🤖</span>
-          </div>
-          <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-            <div class="flex space-x-1">
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:.1s"></div>
-              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:.2s"></div>
-            </div>
-          </div>`;
-      } else {
-        wrap.innerHTML = `
-          <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <span class="text-white text-sm">🤖</span>
-          </div>
-          <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
-            <p class="text-sm whitespace-pre-line">${message}</p>
-          </div>`;
-      }
-
-      chatMessages.appendChild(wrap);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      return wrap;
-    }
-
-    async function getChatGPTResponse(userMessage) {
-      // If no key, we use fallback instantly (no errors)
-      if (!OPENAI_API_KEY) return findBasicResponse(userMessage);
-
-      try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`
-          },
-          body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
-            messages: [
-              { role: 'system', content: INSURANCE_SYSTEM_PROMPT },
-              { role: 'user', content: userMessage }
-            ],
-            max_tokens: 300,
-            temperature: 0.7
-          })
-        });
-
-        if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-        const data = await response.json();
-        const text = data?.choices?.[0]?.message?.content?.trim();
-        return text || findBasicResponse(userMessage);
-      } catch (e) {
-        console.error('ChatGPT API Error:', e);
-        return findBasicResponse(userMessage);
-      }
-    }
-
-    function findBasicResponse(userMessage) {
-      const msg = (userMessage || '').toLowerCase();
-
-      if (/(^|\s)(hi|hello|hey)\b/.test(msg)) {
-        return "Hello! I’m Ray’s AI assistant. I can help you compare Key Person, IUL, Whole Life, and more. What’s your goal—protect family income, build wealth, or both?";
-      }
-      if (insuranceKnowledge['key person insurance'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['key person insurance'].response;
-      }
-      if (insuranceKnowledge['iul'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['iul'].response;
-      }
-      if (insuranceKnowledge['whole life'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['whole life'].response;
-      }
-      if (insuranceKnowledge['term life'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['term life'].response;
-      }
-      if (insuranceKnowledge['coverage amount'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['coverage amount'].response;
-      }
-      if (insuranceKnowledge['tax benefits'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['tax benefits'].response;
-      }
-      if (insuranceKnowledge['business protection'].keywords.some(k => msg.includes(k))) {
-        return insuranceKnowledge['business protection'].response;
-      }
-
-      return "Great question! I can outline options like Key Person, IUL, Whole Life, and Term, and how they fit your budget and goals. Would you like a quick estimate or a call with Curtis at (386) 400-5886?";
-    }
-
-    async function sendMessage() {
-      const message = chatInput.value.trim();
-      if (!message) return;
-      addMessage(message, true);
-      chatInput.value = '';
-
-      const typing = addMessage('', false, true);
-      const reply = await getChatGPTResponse(message);
-      typing.remove();
-      addMessage(reply, false);
-
-      setTimeout(() => {
-        if (/(quote|call|curtis|\(386\)\s*400-5886)/i.test(reply)) {
-          addMessage("💡 Tip: You can also scroll down to fill out the quote form for a quick response!", false);
-        }
-      }, 1200);
-    }
-
-    function sendQuickMessage(text) {
-      chatInput.value = text;
-      sendMessage();
-    }
-
-    function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
-
-    function clearChat() {
-      const welcome = chatMessages.children[0];
-      chatMessages.innerHTML = '';
-      chatMessages.appendChild(welcome);
-    }
-
-    // Helpful tips every 2 minutes (idle)
-    const helpfulTips = [
-      "💡 IUL policies can provide tax-advantaged retirement income.",
-      "🏢 Business owners: Key Person coverage helps keep operations steady.",
-      "💰 Whole Life dividends have a long track record with many carriers.",
-      "📈 IULs often have a 0% floor—no negative market years credited.",
-      "👨‍👩‍👧‍👦 Death benefits are generally income tax-free to beneficiaries."
-    ];
-    let tipTimer;
-    function resetTipTimer() {
-      clearTimeout(tipTimer);
-      tipTimer = setTimeout(() => {
-        const tip = helpfulTips[Math.floor(Math.random() * helpfulTips.length)];
-        addMessage(tip, false);
-      }, 120000);
-    }
-    chatInput?.addEventListener('input', resetTipTimer);
-    resetTipTimer();
-
-    // Form handlers (with consent + honeypot + required checks)
     function collectFormData(form) {
       const fd = new FormData(form);
       const data = {};
@@ -798,167 +116,34 @@ Keep responses conversational, helpful, and under 200 words when possible.`;
       return data;
     }
 
-    function basicValidateRequired(data) {
-      const required = ['firstName','lastName','email','phone','state','age','policyInterest','coverageAmount'];
-      for (const f of required) {
-        if (!data[f] || String(data[f]).trim() === '') return f;
-      }
-      return null;
-    }
-
-    function showInstantThankYou(firstName) {
-      const form = document.getElementById('quote-request-form');
-      form.innerHTML = `
-        <div class="text-center py-12">
-          <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-            <span class="text-5xl">🎉</span>
-          </div>
-          <h3 class="text-3xl font-bold text-gray-900 mb-4">Thank You, ${firstName}!</h3>
-          <p class="text-xl text-gray-600 mb-6">Your information has been received and we'll get back to you soon!</p>
-          <div class="bg-green-50 p-6 rounded-xl border border-green-200 mb-6 text-left max-w-xl mx-auto">
-            <h4 class="font-bold text-green-900 mb-3">✅ What We're Doing Now:</h4>
-            <ul class="text-sm text-green-800 space-y-2 list-disc ml-5">
-              <li>Sending your details to Curtis Ray</li>
-              <li>Preparing your personalized quote options</li>
-              <li>Calling you within 24 hours</li>
-              <li>Shopping top carriers for best rates</li>
-            </ul>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 mb-6">
-            <h4 class="font-bold text-blue-900 mb-2">🚀 Want to Speed Things Up?</h4>
-            <p class="text-blue-800 mb-3">Call Curtis directly for immediate assistance:</p>
-            <a href="tel:386-400-5886" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold">📞 Call (386) 400-5886 Now</a>
-          </div>
-          <button onclick="location.reload()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold">Submit Another Request</button>
-        </div>`;
-    }
-
-    function showSuccessMessage(firstName) {
-      const form = document.getElementById('quote-request-form');
-      form.innerHTML = `
-        <div class="text-center py-12">
-          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"><span class="text-4xl">✅</span></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Quote Request Submitted!</h3>
-          <p class="text-lg text-gray-600 mb-6">Thank you, ${firstName}! Curtis Ray will contact you within 24 hours with your personalized quote.</p>
-          <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 mb-6 text-left max-w-xl mx-auto">
-            <h4 class="font-bold text-blue-900 mb-2">What happens next?</h4>
-            <ul class="text-sm text-blue-800 space-y-2 list-disc ml-5">
-              <li>We review your info and prepare options</li>
-              <li>We’ll call to confirm your goals and budget</li>
-              <li>You’ll receive multiple tailored choices</li>
-              <li>No pressure—just honest advice</li>
-            </ul>
-          </div>
-          <div class="space-y-4">
-            <p class="text-gray-600"><strong>Need immediate assistance?</strong><br/>Call Curtis at <a href="tel:386-400-5886" class="text-blue-600 font-semibold">(386) 400-5886</a></p>
-            <button onclick="location.reload()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold">Submit Another Request</button>
-          </div>
-        </div>`;
-    }
-
-    function highlightInvalid(fieldId) {
-      const el = document.getElementById(fieldId) || document.querySelector(`[name="${fieldId}"]`);
-      if (el) {
-        el.style.borderColor = '#ef4444';
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        el.focus?.();
-      }
-    }
-
-    // Instant submit (no loading state; shows thank-you immediately)
-    function handleInstantSubmit() {
-      const form = document.getElementById('quote-request-form');
-      const data = collectFormData(form);
-
-      // Honeypot
-      if ((data.company || '').trim() !== '') return;
-
-      // Consent
-      const consent = document.getElementById('consent');
-      if (!consent.checked) {
-        alert('Please check the consent box to continue.');
-        return;
-      }
-
-      // Required
-      const missing = basicValidateRequired(data);
-      if (missing) {
-        alert('Please fill out all required fields before submitting.');
-        highlightInvalid(missing);
-        return;
-      }
-
-      showInstantThankYou(data.firstName || 'Friend');
-
-      // Fire-and-forget email
-      emailjs.send('service_gmail', 'template_quote_form', {
-        to_email: 'sfg.cray@gmail.com',
-        from_name: `${data.firstName} ${data.lastName}`,
-        from_email: data.email,
-        phone: data.phone,
-        state: data.state,
-        age: data.age,
-        policy_interest: data.policyInterest,
-        coverage_amount: data.coverageAmount,
-        comments: data.comments || 'No additional comments',
-        submission_date: new Date().toLocaleString(),
-        reply_to: data.email,
-        submission_type: 'Instant Submit'
-      }).then(r => console.log('Email sent (instant):', r.status), e => console.log('Email error (instant):', e));
-    }
-
-    // Regular submit (shows loading + success)
     function handleFormSubmit(e) {
       e.preventDefault();
       const form = e.target;
       const data = collectFormData(form);
 
-      // Honeypot
-      if ((data.company || '').trim() !== '') return;
-
-      // Consent
-      const consent = document.getElementById('consent');
-      if (!consent.checked) {
-        alert('Please check the consent box to continue.');
+      if ((data.company || '').trim() !== '') return; // honeypot
+      if (!document.getElementById('consent').checked) {
+        alert("Please check the consent box to continue.");
         return;
       }
 
-      // Required
-      const missing = basicValidateRequired(data);
-      if (missing) {
-        alert('Please fill out all required fields before submitting.');
-        highlightInvalid(missing);
-        return;
-      }
+      document.getElementById("form-message").innerText = "⏳ Sending...";
 
-      const btn = form.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-      btn.innerHTML = '⏳ Submitting...';
-      btn.disabled = true;
-
-      emailjs.send('service_gmail', 'template_quote_form', {
-        to_email: 'sfg.cray@gmail.com',
+      // ✅ Your actual Service ID and Template ID
+      emailjs.send("service_veds8n5", "template_quote_form", {
+        to_email: "sfg.cray@gmail.com",
         from_name: `${data.firstName} ${data.lastName}`,
         from_email: data.email,
         phone: data.phone,
-        state: data.state,
-        age: data.age,
         policy_interest: data.policyInterest,
-        coverage_amount: data.coverageAmount,
-        comments: data.comments || 'No additional comments',
         submission_date: new Date().toLocaleString(),
-        reply_to: data.email,
-        submission_type: 'Regular Submit'
-      }).then(function(resp) {
-        console.log('Email sent:', resp.status, resp.text);
-        showSuccessMessage(data.firstName || 'Friend');
-      }, function(err) {
-        console.log('Email failed:', err);
-        // Still show success to user
-        showSuccessMessage(data.firstName || 'Friend');
-      }).finally(() => {
-        btn.innerHTML = original;
-        btn.disabled = false;
+        reply_to: data.email
+      }).then(() => {
+        document.getElementById("form-message").innerText = "✅ Thank you! Curtis will contact you soon.";
+        form.reset();
+      }).catch(err => {
+        console.error("EmailJS Error:", err);
+        document.getElementById("form-message").innerText = "❌ There was an issue. Please call (386) 400-5886.";
       });
     }
   </script>
